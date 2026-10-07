@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BelajarKu — Study Planner Mahasiswa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="#beranda" class="logo">Belajar<span>Ku</span></a>
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="#beranda">Beranda</a>
+      <a href="#matkul">Mata Kuliah</a>
+      <a href="#statistik">Progres</a>
+      <a href="#agenda">Agenda</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="beranda" class="hero">
+      <h1>Atur jadwal belajar, tugas tak lagi menumpuk.</h1>
+      <p>Catat mata kuliah, pantau progres, dan lihat deadline terdekat di satu halaman.</p>
+      <a href="#agenda" class="btn btn-lihat">Lihat Agenda</a>
+    </section>
+
+    <!-- MATA KULIAH -->
+    <section id="matkul" class="section">
+      <h2>Mata Kuliah Semester Ini</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Pemrograman Web</h3>
+          <p>HTML, CSS, JavaScript</p>
+          <p class="meta">Senin, 08.00</p>
+        </article>
+        <article class="card">
+          <h3>Basis Data</h3>
+          <p>SQL dan desain tabel</p>
+          <p class="meta">Selasa, 10.00</p>
+        </article>
+        <article class="card">
+          <h3>Struktur Data</h3>
+          <p>Array, stack, queue</p>
+          <p class="meta">Rabu, 13.00</p>
+        </article>
+        <article class="card">
+          <h3>Bahasa Inggris</h3>
+          <p>Academic writing</p>
+          <p class="meta">Kamis, 09.00</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- STATISTIK -->
+    <section id="statistik" class="section section-alt">
+      <h2>Progres Belajarmu</h2>
+      <ul class="stats">
+        <li><strong>4</strong> mata kuliah aktif</li>
+        <li><strong>7</strong> tugas selesai</li>
+        <li><strong>3</strong> tugas belum dikerjakan</li>
+      </ul>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda" class="section">
+      <h2>Deadline Terdekat</h2>
+      <ol class="agenda">
+        <li>
+          <span class="tanggal">3 Okt</span>
+          <span>Tugas 2 Pemrograman Web</span>
+        </li>
+        <li>
+          <span class="tanggal">6 Okt</span>
+          <span>Laporan Praktikum Basis Data</span>
+        </li>
+        <li>
+          <span class="tanggal">10 Okt</span>
+          <span>Kuis Struktur Data</span>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 BelajarKu — dibuat untuk tugas Pemrograman Web.</p>
+  </footer>
+
+</body>
+</html>
