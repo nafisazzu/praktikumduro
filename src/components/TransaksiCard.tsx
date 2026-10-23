@@ -1,7 +1,7 @@
 // =============================================
 // KOMPONEN CUSTOM: satu kartu transaksi
 // =============================================
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Transaksi } from "../types/transaksi";
 import { styles, warna } from "../styles/styles";
@@ -10,9 +10,10 @@ import { hitungTotal, formatRupiah, formatTanggal } from "../utils/hitung";
 // Props: data yang dikirim dari luar ke komponen ini
 interface TransaksiCardProps {
   data: Transaksi;
+  onPress?: () => void;
 }
 
-export default function TransaksiCard({ data }: TransaksiCardProps) {
+export default function TransaksiCard({ data, onPress }: TransaksiCardProps) {
   // CONDITION: tentukan warna, ikon, dan tanda berdasarkan jenis
   const isPenjualan = data.jenis === "penjualan";
   const warnaJenis = isPenjualan ? warna.hijau : warna.merah;
@@ -20,7 +21,7 @@ export default function TransaksiCard({ data }: TransaksiCardProps) {
   const tanda = isPenjualan ? "+" : "-";
 
   return (
-    <View style={styles.kartu}>
+    <Pressable style={styles.kartu} onPress={onPress}>
       {/* INLINE STYLING: warna latar ikon berubah sesuai jenis transaksi */}
       <View
         style={[
@@ -50,6 +51,6 @@ export default function TransaksiCard({ data }: TransaksiCardProps) {
         {tanda}
         {formatRupiah(hitungTotal(data))}
       </Text>
-    </View>
+    </Pressable>
   );
 }

@@ -1,5 +1,5 @@
 // =============================================
-// CUSTOM FUNCTION & LOOP (Modul 1 - 5.3 & 5.4)
+// CUSTOM FUNCTION & LOOP 
 // =============================================
 import { Transaksi, Ringkasan } from "../types/transaksi";
 

@@ -1,16 +1,41 @@
 // =============================================
 // HALAMAN UTAMA MyDuro - Riwayat Transaksi
 // =============================================
-import { View, Text, ScrollView } from "react-native";
+import { useMemo, useState } from "react";
+import { View, Text, ScrollView, Pressable, ActivityIndicator } from "react-native";
+import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { daftarTransaksi } from "../data/transaksi";
 import { hitungRingkasan, formatRupiah } from "../utils/hitung";
 import { styles, warna } from "../styles/styles";
+import { JenisTransaksi } from "../types/transaksi";
+import { useTransaksi } from "../context/TransaksiContext";
 import TransaksiCard from "../components/TransaksiCard";
 
+type Filter = "semua" | JenisTransaksi;
+const OPSI_FILTER: Filter[] = ["semua", "penjualan", "pembelian"];
+
 export default function Index() {
-  // Custom function + loop dipanggil di sini
-  const ringkasan = hitungRingkasan(daftarTransaksi);
+  const router = useRouter();
+  const { daftar, loading } = useTransaksi();
+  const [filter, setFilter] = useState<Filter>("semua");
+
+  // Dihitung ulang hanya jika daftar berubah
+  const ringkasan = useMemo(() => hitungRingkasan(daftar), [daftar]);
+
+  // Dihitung ulang hanya jika daftar atau filter berubah
+  const daftarTampil = useMemo(
+    () => (filter === "semua" ? daftar : daftar.filter((trx) => trx.jenis === filter)),
+    [daftar, filter]
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.tengah}>
+        <ActivityIndicator size="large" color={warna.utama} />
+      </View>
+    );
+  }
+
   const untung = ringkasan.selisih >= 0;
 
   return (
@@ -19,8 +44,16 @@ export default function Index() {
         {/* ---------- HEADER ---------- */}
         <View style={styles.header}>
           <View style={styles.headerBaris}>
-            <Ionicons name="storefront" size={28} color={warna.putih} />
-            <Text style={styles.judulApp}>MyDuro</Text>
+            <View style={styles.headerKiri}>
+              <Ionicons name="storefront" size={28} color={warna.putih} />
+              <Text style={styles.judulApp}>MyDuro</Text>
+            </View>
+
+            {/* push: membuka halaman tambah di atas stack */}
+            <Pressable style={styles.tombolTambah} onPress={() => router.push("../tambah")}>
+              <Ionicons name="add" size={18} color={warna.utama} />
+              <Text style={styles.teksTombol}>Tambah</Text>
+            </Pressable>
           </View>
           <Text style={styles.subJudul}>
             Riwayat transaksi toko · {ringkasan.jumlahTransaksi} transaksi
@@ -47,7 +80,6 @@ export default function Index() {
 
           <View style={styles.kotakSelisih}>
             <Text style={styles.labelRingkasan}>Selisih (penjualan − pembelian)</Text>
-            {/* INLINE STYLING dinamis: hijau kalau untung, merah kalau rugi */}
             <Text
               style={{
                 fontSize: 22,
@@ -60,13 +92,37 @@ export default function Index() {
           </View>
         </View>
 
-        {/* ---------- DAFTAR TRANSAKSI (LOOP dengan map) ---------- */}
+        {/* ---------- FILTER + DAFTAR TRANSAKSI ---------- */}
         <View style={styles.isi}>
           <Text style={styles.judulBagian}>Riwayat Transaksi</Text>
 
-          {daftarTransaksi.map((trx) => (
-            <TransaksiCard key={trx.id} data={trx} />
-          ))}
+          <View style={styles.filterBaris}>
+            {OPSI_FILTER.map((opsi) => (
+              <Pressable
+                key={opsi}
+                style={[styles.chip, filter === opsi && styles.chipAktif]}
+                onPress={() => setFilter(opsi)}
+              >
+                <Text style={[styles.teksChip, filter === opsi && styles.teksChipAktif]}>
+                  {opsi}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+
+          {daftarTampil.length === 0 ? (
+            <Text style={styles.kosong}>Belum ada transaksi.</Text>
+          ) : (
+            daftarTampil.map((trx) => (
+              <TransaksiCard
+                key={trx.id}
+                data={trx}
+                onPress={() =>
+                  router.push({ pathname: "../detail/[id]", params: { id: trx.id } })
+                }
+              />
+            ))
+          )}
         </View>
       </ScrollView>
     </View>
