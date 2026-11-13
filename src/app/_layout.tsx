@@ -17,6 +17,9 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="tambah" options={{ title: "Tambah Transaksi" }} />
         <Stack.Screen name="detail/[id]" options={{ title: "Detail Transaksi" }} />
+        <Stack.Screen name="barang/index" options={{ title: "Katalog Barang" }} />
+        <Stack.Screen name="barang/[id]" options={{ title: "Detail Barang" }} />
+        <Stack.Screen name="demo" options={{ title: "Demo" }} />
       </Stack>
     </TransaksiProvider>
   );

@@ -49,11 +49,22 @@ export default function Index() {
               <Text style={styles.judulApp}>MyDuro</Text>
             </View>
 
-            {/* push: membuka halaman tambah di atas stack */}
-            <Pressable style={styles.tombolTambah} onPress={() => router.push("../tambah")}>
-              <Ionicons name="add" size={18} color={warna.utama} />
-              <Text style={styles.teksTombol}>Tambah</Text>
-            </Pressable>
+            <View style={styles.headerKiri}>
+              {/* Modul 3: buka katalog barang yang datanya diambil dari API */}
+              <Pressable
+                style={[styles.tombolTambah, { marginRight: 8 }]}
+                onPress={() => router.push("/barang")}
+              >
+                <Ionicons name="cube" size={16} color={warna.utama} />
+                <Text style={styles.teksTombol}>Katalog</Text>
+              </Pressable>
+
+              {/* push: membuka halaman tambah di atas stack */}
+              <Pressable style={styles.tombolTambah} onPress={() => router.push("/tambah")}>
+                <Ionicons name="add" size={18} color={warna.utama} />
+                <Text style={styles.teksTombol}>Tambah</Text>
+              </Pressable>
+            </View>
           </View>
           <Text style={styles.subJudul}>
             Riwayat transaksi toko · {ringkasan.jumlahTransaksi} transaksi
@@ -128,3 +139,4 @@ export default function Index() {
     </View>
   );
 }
+

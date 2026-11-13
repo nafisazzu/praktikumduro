@@ -216,4 +216,32 @@ export const styles = StyleSheet.create({
     textAlign: "right",
     marginLeft: 12,
   },
+  // ---------- Modul 3: katalog barang dari API ----------
+  teksInfo: { color: warna.teksAbu, marginTop: 12, textAlign: "center" },
+  subJudulGelap: { color: warna.teksAbu, fontSize: 13, marginBottom: 12 },
+  gambarBarang: {
+    width: 52,
+    height: 52,
+    borderRadius: 10,
+    backgroundColor: "#E2E8F0",
+    marginRight: 12,
+  },
+  gambarDetail: {
+    width: "100%",
+    height: 220,
+    borderRadius: 14,
+    backgroundColor: "#E2E8F0",
+    marginBottom: 12,
+  },
+  barisJumlah: { flexDirection: "row", alignItems: "center", marginBottom: 8 },
+  tombolJumlah: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: warna.utama,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  teksTombolJumlah: { color: warna.putih, fontSize: 20, fontWeight: "bold" },
+  angkaJumlah: { fontSize: 18, fontWeight: "bold", marginHorizontal: 20, color: warna.teks },
 });
